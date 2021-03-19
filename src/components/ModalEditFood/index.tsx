@@ -5,12 +5,21 @@ import { Form } from './styles';
 import Modal from '../Modal';
 import Input from '../Input';
 
-function ModalEditFood(props) {
-  const formRef = useRef();
+import { FoodObject } from '../Food';
+
+interface ModalEditFoodProps {
+  isOpen: boolean;
+  setIsOpen: () => void;
+  editingFood: FoodObject;
+  handleUpdateFood: (food: FoodObject) => Promise<void>;
+}
+
+function ModalEditFood(props: ModalEditFoodProps) {
+  const formRef = useRef<any>();
 
   const { isOpen, setIsOpen, editingFood } = props;
 
-  const handleSubmit = async data => {
+  const handleSubmit: (data: FoodObject) => void = async data => {
     const { setIsOpen, handleUpdateFood } = props;
 
     handleUpdateFood(data);
